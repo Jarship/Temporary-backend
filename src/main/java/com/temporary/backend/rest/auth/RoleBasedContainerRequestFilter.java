@@ -80,7 +80,7 @@ public class RoleBasedContainerRequestFilter implements ContainerRequestFilter {
             } catch(Exception e) {
                 LOG.log(Level.SEVERE, "An exception occurred when setting user", e);
                 if (abortRequestOnFailure) {
-                    abortRequestUnauthorized(requestContext, "An error occured when attempting to authorize the user.");
+                    abortRequestUnauthorized(requestContext, "An error occurred when attempting to authorize the user.");
                 }
                 return null;
             }
