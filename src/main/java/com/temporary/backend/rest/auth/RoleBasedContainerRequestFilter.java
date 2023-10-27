@@ -74,7 +74,7 @@ public class RoleBasedContainerRequestFilter implements ContainerRequestFilter {
                 return null;
             } catch(JOSEException e) {
                 if (abortRequestOnFailure) {
-                    aborotRequestUnauthorized(requestContext, e.getLocalizedMessage());
+                    abortRequestUnauthorized(requestContext, e.getLocalizedMessage());
                 }
                 return null;
             } catch(Exception e) {
