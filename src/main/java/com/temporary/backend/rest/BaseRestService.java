@@ -4,6 +4,7 @@ import org.apache.commons.io.IOUtils;
 import org.jboss.resteasy.plugins.providers.multipart.InputPart;
 import com.temporary.backend.exception.ApplicationException;
 import com.temporary.backend.exception.ErrorCode;
+import com.temporary.backend.model.Account;
 import com.temporary.backend.rest.config.RestError;
 
 import javax.servlet.http.HttpServletRequest;
@@ -35,11 +36,9 @@ public abstract class BaseRestService {
     public static final String USER_SESSION = "userSession";
     public static final String TOKEN_HEADER = "token";
 
-    /*
     public Account getCurrentAccount(@Context HttpServletRequest request) {
         return (Account) request.getAttribute(USER_ATTRIBUTE);
     }
-     */
 
     public String getToken(@Context HttpServletRequest request) {
         return (String) request.getAttribute(TOKEN_ATTRIBUTE);
