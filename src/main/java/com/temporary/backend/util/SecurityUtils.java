@@ -9,6 +9,7 @@ import com.nimbusds.jose.crypto.MACVerifier;
 import com.nimbusds.jwt.JWTClaimsSet;
 import com.nimbusds.jwt.SignedJWT;
 import org.apache.commons.codec.binary.Base64;
+import com.temporary.backend.model.AccountType;
 import com.temporary.backend.model.Password;
 
 import java.security.MessageDigest;
@@ -80,13 +81,14 @@ public class SecurityUtils {
         return Objects.equals(hash, hashedString.toString());
     }
 
-    public static String generateJwt(int accountId, String accountName) throws JOSEException {
+    public static String generateJwt(int accountId, String accountName, AccountType accountType) throws JOSEException {
         JWSSigner signer = new MACSigner(JWT_SECRET.getBytes());
 
         JWTClaimsSet.Builder claimsSet = new JWTClaimsSet.Builder();
         claimsSet.subject(String.valueOf(accountId));
         claimsSet.issueTime(new Date());
         claimsSet.claim(ACCOUNT_NAME_CLAIM, accountName);
+        claimsSet.claim(ACCOUNT_TYPE_CLAIM, accountType);
         claimsSet.issuer(JWT_ISSUER);
 
         SignedJWT signedJWT = new SignedJWT(new JWSHeader(JWSAlgorithm.HS256), claimsSet.build());
