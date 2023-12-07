@@ -14,13 +14,15 @@ CREATE TABLE `account` (
     KEY `username` (`username`)
     );
 
-CREATE TABLE `account_relationships` (
-    `relationship_id` int(11) NOT NULL AUTO_INCREMENT,
-    `primary_id` int(11) NOT NULL,
-    `secondary_id` int(11) NOT NULL,
-    `relationship` enum('BLOCK','FOLLOW') NOT NULL DEFAULT 'FOLLOW',
-    PRIMARY_KEY (`relationship_id`),
-    FOREIGN KEY (`primary_id`) references account(`account_id`)
-    FOREIGN KEY (`secondary_id`) references account(`account_id`)
-);
+-- Saved for future
+--CREATE TABLE `account_relationships` (
+--    `relationship_id` int(11) NOT NULL AUTO_INCREMENT,
+--    `primary_id` int(11) NOT NULL,
+--    `secondary_id` int(11) NOT NULL,
+--    `relationship` enum('BLOCK','FOLLOW') NOT NULL DEFAULT 'FOLLOW',
+--    PRIMARY_KEY (`relationship_id`),
+--    FOREIGN KEY (`primary_id`) references account(`account_id`)
+--    FOREIGN KEY (`secondary_id`) references account(`account_id`)
+--);
 
+-- Ran in Dev 12-7-23
