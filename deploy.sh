@@ -26,5 +26,6 @@ if [ "$1" = "dev" ]; then
   ssh -i $pemfile $user@$host "sudo rm -rf /usr/share/tomcat/webapps/temporary"
   ssh -i $pemfile $user@$host "sudo cp temporary.war /usr/share/tomcat/webapps/temporary.war"
   ssh -i $pemfile $user@$host "sudo tomcatup"
+#  ssh -i $pemfile $user@$host "rm temporary.war"
   ssh -i $pemfile $user@$host "sudo tail -f /usr/share/tomcat/logs/catalina.out"
 fi
