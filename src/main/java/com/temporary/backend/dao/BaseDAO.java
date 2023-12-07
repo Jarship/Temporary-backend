@@ -16,7 +16,7 @@ import java.util.logging.Logger;
 
 public abstract class BaseDAO {
     public static final String JDBC_CONTEXT = "java:/comp/env";
-    public static final String JDBC_NAME = "jdbc/temporary-app";
+    public static final String JDBC_NAME = "jdbc/temporary_app";
 
     protected Logger logger = Logger.getLogger(BaseDAO.class.getSimpleName());
 

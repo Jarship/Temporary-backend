@@ -16,6 +16,7 @@ public class TemporaryRestApplication extends Application {
         logger.info("---- init TemporaryRestApplicationl ----");
         singletons = new HashSet<>();
         singletons.add(new TestRestService());
+        singletons.add(new AccountRestService());
     }
 
     @Override
