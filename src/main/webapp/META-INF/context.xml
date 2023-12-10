@@ -1,21 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Resource
-        name="jdbc/temporary_app"
-        auth="Container"
-        type="javax.sql.DataSource"
-        factory="org.apache.commons.dbcp.BasicDataSourceFactory"
-        maxTotal="50"
-        maxIdle="30"
-        maxWaitMillis="10000"
-        testWhileIdle="true"
-        testOnBorrow="true"
-        validationQuery="SELECT 1"
-        removeAbandonedOnBorrow="true"
-        removeAbandonedOnMaintenance="true"
-        removeAbandonedTimeout="200"
-        logAbandoned="true"
-        driverClassName="com.mysql.jdbc.Driver"
-        username="root"
-        password="Helena,062017"
-        url="jdbc:mysql://localhost:3306/temporary_app"
-/>
+<Context>
+    <Resource
+            name="jdbc/temporary_app"
+            auth="Container"
+            type="javax.sql.DataSource"
+            factory="org.apache.commons.dbcp.BasicDataSourceFactory"
+            maxTotal="50"
+            maxIdle="30"
+            maxWaitMillis="10000"
+            testWhileIdle="true"
+            testOnBorrow="true"
+            validationQuery="SELECT 1"
+            removeAbandonedOnBorrow="true"
+            removeAbandonedOnMaintenance="true"
+            removeAbandonedTimeout="200"
+            logAbandoned="true"
+            driverClassName="com.mysql.jdbc.Driver"
+            username="root"
+            password="Helena,062017"
+            url="jdbc:mysql://localhost:3306/temporary_app"
+    />
+</Context>
