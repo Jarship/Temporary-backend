@@ -4,7 +4,7 @@
             name="jdbc/temporary_app"
             auth="Container"
             type="javax.sql.DataSource"
-            factory="org.apache.commons.dbcp.BasicDataSourceFactory"
+            factory="org.apache.tomcat.dbcp.dbcp2.BasicDataSourceFactory"
             maxTotal="50"
             maxIdle="30"
             maxWaitMillis="10000"
