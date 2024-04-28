@@ -21,7 +21,7 @@ public class AssemblyRestService extends BaseRestService {
     @Path("")
     @POST
     @AccountTypesAllowed({AccountType.ADMIN})
-    public Response createAssembly(Assembly assembly) {
+    public Response createAssembly(@Context HttpServletRequest request, Assembly assembly) {
         try {
             AssemblyDAO dao = new AssemblyDAO();
             int assemblyId = dao.createAssembly(assembly);
