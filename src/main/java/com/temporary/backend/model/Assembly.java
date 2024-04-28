@@ -21,8 +21,8 @@ public class Assembly extends BaseModel {
     public int getAssemblyId() { return assemblyId; }
 
     public void setAssemblyId(int assemblyId) { this.assemblyId = assemblyId; }
-    public String getAssemblyName() { return name; }
-    public void setAssemblyName(String name){ this.name = name; }
+    public String getName() { return name; }
+    public void setName(String name){ this.name = name; }
     public boolean isHidden() { return hidden; }
     public void setHidden(boolean hidden){ this.hidden = hidden; }
 

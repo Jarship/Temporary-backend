@@ -11,12 +11,12 @@ public class AssemblyDAO extends BaseDAO {
 
     public int createAssembly(Assembly assembly) throws DatabaseException {
         String sql = "INSERT INTO assembly(name, hidden) values(?,?)";
-        return this.insertWithIntegerAutokey(sql, assembly.getAssemblyName(), assembly.isHidden() ? 1 : 0);
+        return this.insertWithIntegerAutokey(sql, assembly.getName(), assembly.isHidden() ? 1 : 0);
     }
 
     public boolean updateAssembly(Assembly assembly) throws DatabaseException {
         String sql = "UPDATE assembly SET name=?, hidden=? WHERE assembly_id=?";
-        return this.executeUpdate(sql, assembly.getAssemblyName(), assembly.isHidden() ? 1 : 0, assembly.getAssemblyId()) > 0;
+        return this.executeUpdate(sql, assembly.getName(), assembly.isHidden() ? 1 : 0, assembly.getAssemblyId()) > 0;
     }
 
     public Assembly getAssembly(int assemblyId) throws DatabaseException {
