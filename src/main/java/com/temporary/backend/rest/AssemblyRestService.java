@@ -13,12 +13,10 @@ import javax.ws.rs.*;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-import java.util.List;
 @Path("assembly")
 @Consumes({MediaType.APPLICATION_JSON})
 @Produces({MediaType.APPLICATION_JSON})
 public class AssemblyRestService extends BaseRestService {
-
     @Path("")
     @POST
     @AccountTypesAllowed({AccountType.ADMIN})
@@ -51,6 +49,8 @@ public class AssemblyRestService extends BaseRestService {
         try {
             AssemblyDAO dao = new AssemblyDAO();
             Account account = this.getCurrentAccount(request);
+            if (account == null || account.getAccountId() == 0)
+                throw new ApplicationException("User must be logged in");
             return successResponse(dao.getUserAssemblies(account.getAccountId()));
         } catch (Exception e) {
             return handleException(e);

@@ -17,4 +17,5 @@ CREATE TABLE `assembly_user` (
     PRIMARY KEY(`relationship_id`),
     FOREIGN KEY (`assembly_id`) references assembly(`assembly_id`),
     FOREIGN KEY (`account_id`) references account(`account_id`),
+    UNIQUE KEY `assembly_user` (`assembly_id`, `account_id`)
 );

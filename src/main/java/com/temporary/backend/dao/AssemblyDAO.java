@@ -3,6 +3,7 @@ package com.temporary.backend.dao;
 import com.temporary.backend.exception.DatabaseException;
 import com.temporary.backend.model.Account;
 import com.temporary.backend.model.Assembly;
+import com.temporary.backend.model.Relationship;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -89,4 +90,31 @@ public class AssemblyDAO extends BaseDAO {
         String sql = "SELECT * from assembly WHERE hidden = 0";
         return this.queryForList(sql, Assembly.class);
     }
+
+    private int formAssemblyAccountRelationship(int accountId, int assemblyId, Relationship relationship) throws DatabaseException {
+        String sql = "INSERT INTO assembly_user (assembly_id, account_id, relationship) VALUES(?,?,?)" +
+                " ON DUPLICATE KEY UPDATE assembly_id=?, account_id=?, relationship=?";
+        return this.insertWithIntegerAutokey(sql, assemblyId, accountId, relationship.name());
+    }
+    public boolean followAssemblyUser(int accountId, int assemblyId) throws DatabaseException {
+        return formAssemblyAccountRelationship(accountId, assemblyId, Relationship.FOLLOW) > 0;
+    }
+
+    public boolean joinAssemblyUser(int accountId, int assemblyId) throws DatabaseException {
+        return formAssemblyAccountRelationship(accountId, assemblyId, Relationship.JOIN) > 0;
+    }
+
+    public boolean ignoreAssemblyUser(int accountId, int assemblyId) throws DatabaseException {
+        return formAssemblyAccountRelationship(accountId, assemblyId, Relationship.IGNORE) > 0;
+    }
+
+    public boolean acceptAssemblyUser(int accountId, int assemblyId) throws DatabaseException {
+        return formAssemblyAccountRelationship(accountId, assemblyId, Relationship.ACCEPTED) > 0;
+    }
+
+    public boolean removeAssemblyUser(int accountId, int assemblyId) throws DatabaseException {
+        return formAssemblyAccountRelationship(accountId, assemblyId, Relationship.NONE) > 0;
+    }
+
+
 }
