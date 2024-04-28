@@ -116,7 +116,7 @@ public class AssemblyDAO extends BaseDAO {
     private int formAssemblyAccountRelationship(int accountId, int assemblyId, Relationship relationship) throws DatabaseException {
         String sql = "INSERT INTO assembly_user (assembly_id, account_id, relationship) VALUES(?,?,?)" +
                 " ON DUPLICATE KEY UPDATE assembly_id=?, account_id=?, relationship=?";
-        return this.insertWithIntegerAutokey(sql, assemblyId, accountId, relationship.name());
+        return this.insertWithIntegerAutokey(sql, assemblyId, accountId, relationship.name(), assemblyId, accountId, relationship.name());
     }
     public boolean followAssemblyUser(int accountId, int assemblyId) throws DatabaseException {
         return formAssemblyAccountRelationship(accountId, assemblyId, Relationship.FOLLOW) > 0;
