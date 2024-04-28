@@ -124,8 +124,8 @@ public class AccountManager extends BaseManager {
     }
 
     public Account createAccount(Account account) throws ApplicationException {
-        if (account.getEmail() == null || account.getEmail().length() < 3)
-            throw new ApplicationException.ValidationException("Missing email address");
+        if ((account.getEmail() == null || account.getEmail().length() < 3) && (account.getPhone() == null || account.getPhone().length() < 3))
+            throw new ApplicationException.ValidationException("Email or Phone # required");
         if (account.getUsername() == null)
             throw new ApplicationException.ValidationException("Missing username");
         Account exists = dao.getAccount(account.getEmail(), account.getAccountType(), false);
@@ -145,7 +145,7 @@ public class AccountManager extends BaseManager {
             endTransaction();
         }
 
-        // ToDo: Send confrimation email
+        // ToDo: Send confirmation email
     }
 
     public void deleteAccount(int accountId) throws ApplicationException {

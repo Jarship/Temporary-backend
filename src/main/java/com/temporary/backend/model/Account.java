@@ -16,6 +16,8 @@ public class Account extends BaseModel{
     private boolean accountEnabled;
     private AccountType accountType;
 
+    private String phone;
+
     // Transient fields used for new account creation
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private String  password;
@@ -43,6 +45,8 @@ public class Account extends BaseModel{
     public String getUsername() {
         return username;
     }
+
+    public String getPhone() { return phone; }
 
     public String getPassword() {
         return password;

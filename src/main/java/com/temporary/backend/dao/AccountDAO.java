@@ -16,9 +16,9 @@ public class AccountDAO  extends BaseDAO {
     }
 
     public int createAccount(Account account, Password password) throws DatabaseException {
-        String sql = "INSERT INTO account(email, password, password_salt, account_enabled, account_type, username)  " +
+        String sql = "INSERT INTO account(email, phone, password, password_salt, account_enabled, account_type, username)  " +
                 "values(?,?,?,?,?,?)";
-        return this.insertWithIntegerAutokey(sql, account.getEmail(), password.getHash(), password.getSalt(), account.isAccountEnabled() ? 1 : 0,
+        return this.insertWithIntegerAutokey(sql, account.getEmail(), account.getPhone(), password.getHash(), password.getSalt(), account.isAccountEnabled() ? 1 : 0,
                 account.getAccountType().name(), account.getUsername());
     }
 
@@ -29,8 +29,8 @@ public class AccountDAO  extends BaseDAO {
 
     public int deleteAccount(int accountId) throws DatabaseException {
         String[] sqls = new String[]{
-                "delete from account_relationships WHERE primary_id = ?",
-                "delete from account_relationships WHERE secondary_id = ?",
+//                "delete from account_relationships WHERE primary_id = ?",
+//                "delete from account_relationships WHERE secondary_id = ?",
                 "delete from account WHERE account_id = ?"
         };
         int result = 0;
