@@ -26,10 +26,13 @@ public class AssemblyDAO extends BaseDAO {
                 switch(relationship) {
                     case FOLLOW:
                         a.getFollowers().add(new Account(rs));
+                        break;
                     case JOIN:
                         a.getJoiners().add(new Account(rs));
+                        break;
                     case ACCEPTED:
                         a.getAccepted().add(new Account(rs));
+                        break;
                 }
             }
 
