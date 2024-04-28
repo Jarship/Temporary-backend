@@ -31,7 +31,7 @@ public class AssemblyRestService extends BaseRestService {
         }
     }
 
-    @PATH("")
+    @Path("")
     @PUT
     @AccountTypesAllowed({AccountType.ADMIN})
     public Response updateAssembly(Assembly assembly) {
@@ -44,7 +44,7 @@ public class AssemblyRestService extends BaseRestService {
         }
     }
 
-    @PATH("{assemblyId}")
+    @Path("{assemblyId}")
     @GET
     @PermitAll
     public Response getAssembly(@PathParam("assemblyId") int assemblyId) {
