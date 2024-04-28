@@ -3,6 +3,7 @@ package com.temporary.backend.model;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import org.checkerframework.checker.units.qual.A;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -16,6 +17,8 @@ public class Assembly extends BaseModel {
     private boolean hidden;
 
     private List<Account> followers = new ArrayList<>();
+    private List<Account> joiners = new ArrayList<>();
+    private List<Account> accepted = new ArrayList<>();
 
     public Assembly() {}
     public Assembly(ResultSet rs) throws SQLException {
@@ -31,5 +34,7 @@ public class Assembly extends BaseModel {
     public void setHidden(boolean hidden){ this.hidden = hidden; }
 
     public List<Account> getFollowers() { return followers; }
+    public List<Account> getJoiners() { return joiners; }
+    public List<Account> getAccepted() { return accepted; }
 
 }

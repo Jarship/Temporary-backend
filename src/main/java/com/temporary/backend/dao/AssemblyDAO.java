@@ -25,6 +25,10 @@ public class AssemblyDAO extends BaseDAO {
                 switch(relationship) {
                     case FOLLOW:
                         a.getFollowers().add(new Account(rs));
+                    case JOIN:
+                        a.getJoiners().add(new Account(rs));
+                    case ACCEPTED:
+                        a.getAccepted().add(new Account(rs));
                 }
             }
 
@@ -49,6 +53,10 @@ public class AssemblyDAO extends BaseDAO {
                 switch(relationship) {
                     case FOLLOW:
                         assembly.getFollowers().add(new Account(rs));
+                    case JOIN:
+                        assembly.getJoiners().add(new Account(rs));
+                    case ACCEPTED:
+                        assembly.getAccepted().add(new Account(rs));
                 }
             }
         }
@@ -84,8 +92,15 @@ public class AssemblyDAO extends BaseDAO {
     public List<Assembly> getUserAssemblies(int accountId) throws DatabaseException {
         String sql = "SELECT a.assembly_id, a.name, a.hidden FROM assembly a " +
                 "INNER JOIN assembly_user au on a.assembly_id = au.assembly_id " +
-                "WHERE au.account_id = ? AND au.relationship != \"NONE\" AND au.relationship != \"IGNORE\"";
-        return this.queryForList(sql, Assembly.class, accountId);
+                "WHERE au.account_id = ? AND au.relationship != ? AND au.relationship != ?";
+        return this.queryForList(sql, Assembly.class, accountId, Relationship.NONE.name(), Relationship.IGNORE.name());
+    }
+
+    public List<Assembly> getIgnoredAssemblies(int accountId) throws DatabaseException {
+        String sql = "SELECT a.assembly_id, a.name, a.hidden FROM assembly a " +
+                "INNER JOIN assembly_user au on a.assembly_id = au.assembly_id " +
+                "WHERE au.account_id = ? AND au.relationship = ?";
+        return this.queryForList(sql, Assembly.class, accountId, Relationship.IGNORE.name());
     }
 
     public List<Assembly> getPublicAssemblies() throws DatabaseException {

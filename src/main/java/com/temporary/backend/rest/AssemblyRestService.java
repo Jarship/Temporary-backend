@@ -80,4 +80,18 @@ public class AssemblyRestService extends BaseRestService {
         }
     }
 
+    @Path("ignored")
+    @GET
+    public Response getIgnoredAssemblies(@Context HttpServletRequest request) {
+        try {
+            AssemblyDAO dao = new AssemblyDAO();
+            Account account = this.getCurrentAccount(request);
+            if (account == null || account.getAccountId() == 0)
+                throw new ApplicationException("User must be logged in");
+            return successResponse(dao.getIgnoredAssemblies(account.getAccountId()));
+        } catch(Exception e) {
+            return handleException(e);
+        }
+    }
+
 }
