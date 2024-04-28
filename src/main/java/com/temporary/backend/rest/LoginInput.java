@@ -4,11 +4,12 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.temporary.backend.model.AccountType;
 @JsonIgnoreProperties(ignoreUnknown = true, allowGetters = true, allowSetters = true)
 public class LoginInput {
-
+    private String phone;
     private String email;
     private String password;
     private String externalCredential;
     private AccountType accountType;
+    public String getPhone() { return phone; }
 
     public String getEmail() {
         return email;

@@ -38,8 +38,12 @@ public class AccountManager extends BaseManager {
         if (loginInput.getExternalCredential() != null) {
             return dao.getAccountByCredential(loginInput.getExternalCredential());
         }
-
-        Account account = dao.getAccount(loginInput.getEmail(), loginInput.getAccountType(), true);
+        Account account = null;
+        if (loginInput.getEmail() != null && loginInput.getEmail().length() > 0) {
+            account = dao.getAccount(loginInput.getEmail(), loginInput.getAccountType(), true);
+        } else if (loginInput.getPhone() != null && loginInput.getPhone().length() > 0) {
+            account = dao.getAccountByPhone(loginInput.getPhone(), loginInput.getAccountType(), true);
+        }
         if (account != null && account.getPassword() != null && loginInput.getPassword() != null) {
             try {
                 boolean valid = SecurityUtils.validatePassword(loginInput.getPassword(), account.getPassword(), account.getPasswordSalt());
