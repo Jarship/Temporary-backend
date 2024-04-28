@@ -18,7 +18,7 @@ public class AssemblyDAO extends BaseDAO {
             }
             String relationship = rs.getString("relationship");
             if (!rs.wasNull() && relationship.length() > 0) {
-                if (relationship == "FOLLOW") {
+                if (relationship.equals("FOLLOW")) {
                     a.getFollowers().add(new Account(rs));
                 }
             }
