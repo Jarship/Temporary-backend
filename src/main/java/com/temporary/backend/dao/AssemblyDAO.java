@@ -20,8 +20,9 @@ public class AssemblyDAO extends BaseDAO {
             if (a == null) {
                 a = new Assembly(rs);
             }
-            Relationship relationship = rs.getObject("relationship", Relationship.class);
+            String relationshipString = rs.getString("relationship");
             if (!rs.wasNull()) {
+                Relationship relationship = Relationship.valueOf(relationshipString);
                 switch(relationship) {
                     case FOLLOW:
                         a.getFollowers().add(new Account(rs));
@@ -48,8 +49,9 @@ public class AssemblyDAO extends BaseDAO {
                 assembly = new Assembly(rs);
                 assemblyMap.put(assemblyId, assembly);
             }
-            Relationship relationship = rs.getObject("relationship", Relationship.class);
+            String relationshipString = rs.getString("relationship");
             if (!rs.wasNull()) {
+                Relationship relationship = Relationship.valueOf(relationshipString);
                 switch(relationship) {
                     case FOLLOW:
                         assembly.getFollowers().add(new Account(rs));
