@@ -17,7 +17,7 @@ public class AccountDAO  extends BaseDAO {
 
     public int createAccount(Account account, Password password) throws DatabaseException {
         String sql = "INSERT INTO account(email, phone, password, password_salt, account_enabled, account_type, username)  " +
-                "values(?,?,?,?,?,?)";
+                "values(?,?,?,?,?,?,?)";
         return this.insertWithIntegerAutokey(sql, account.getEmail(), account.getPhone(), password.getHash(), password.getSalt(), account.isAccountEnabled() ? 1 : 0,
                 account.getAccountType().name(), account.getUsername());
     }
