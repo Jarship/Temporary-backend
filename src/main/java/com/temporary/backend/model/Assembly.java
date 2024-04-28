@@ -6,12 +6,16 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Assembly extends BaseModel {
     private int assemblyId;
     private String name;
     private boolean hidden;
+
+    private List<Account> followers = new ArrayList<>();
 
     public Assembly() {}
     public Assembly(ResultSet rs) throws SQLException {
@@ -25,5 +29,7 @@ public class Assembly extends BaseModel {
     public void setName(String name){ this.name = name; }
     public boolean isHidden() { return hidden; }
     public void setHidden(boolean hidden){ this.hidden = hidden; }
+
+    public List<Account> getFollowers() { return followers; }
 
 }
