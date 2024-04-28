@@ -18,6 +18,7 @@ public class TemporaryRestApplication extends Application {
         singletons.add(new TestRestService());
         singletons.add(new AccountRestService());
         singletons.add(new AssemblyRestService());
+        singletons.add(new AssemblyUserRestService());
     }
 
     @Override
