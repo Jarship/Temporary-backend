@@ -2,6 +2,7 @@ package com.temporary.backend.rest;
 
 import com.temporary.backend.dao.AssemblyDAO;
 import com.temporary.backend.exception.ApplicationException;
+import com.temporary.backend.model.Account;
 import com.temporary.backend.model.AccountType;
 import com.temporary.backend.model.Assembly;
 import com.temporary.backend.rest.auth.AccountTypesAllowed;
@@ -44,6 +45,17 @@ public class AssemblyRestService extends BaseRestService {
         }
     }
 
+    @Path("")
+    @GET
+    public Response getUserAssemblies(@Context HttpServletRequest request) {
+        try {
+            AssemblyDAO dao = new AssemblyDAO();
+            Account account = this.getCurrentAccount(request);
+            return successResponse(dao.getUserAssemblies(account.getAccountId()));
+        } catch (Exception e) {
+            return handleException(e);
+        }
+    }
     @Path("{assemblyId}")
     @GET
     @PermitAll
