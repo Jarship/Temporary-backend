@@ -13,10 +13,11 @@ public class TemporaryRestApplication extends Application {
     protected Logger logger = Logger.getLogger(TemporaryRestApplication.class.getSimpleName());
 
     public TemporaryRestApplication() {
-        logger.info("---- init TemporaryRestApplicationl ----");
+        logger.info("---- init TemporaryRestApplication ----");
         singletons = new HashSet<>();
         singletons.add(new TestRestService());
         singletons.add(new AccountRestService());
+        singletons.add(new AssemblyRestService());
     }
 
     @Override
