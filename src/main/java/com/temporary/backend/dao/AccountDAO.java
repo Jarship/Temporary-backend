@@ -51,12 +51,12 @@ public class AccountDAO  extends BaseDAO {
 
     public Account getAccount(String email, AccountType accountType, boolean enabledOnly) throws DatabaseException {
         String sql = "SELECT * from account where email=? AND account_type=?" + (enabledOnly ? " AND account_enabled=1" : "");
-        return this.queryForObject(sql, Account.class, email, accountType);
+        return this.queryForObject(sql, Account.class, email, accountType.name());
     }
 
     public Account getAccountByPhone(String phone, AccountType accountType, boolean enabledOnly) throws DatabaseException {
         String sql = "SELECT * from account where phone=? AND account_type=?" + (enabledOnly ? " AND account_enabled=1" : "");
-        return this.queryForObject(sql, Account.class, phone, accountType);
+        return this.queryForObject(sql, Account.class, phone, accountType.name());
     }
 
     public AccountType getAccountType(String email, String confirmationCode) throws DatabaseException {
