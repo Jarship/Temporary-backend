@@ -3,8 +3,10 @@ package com.temporary.backend.rest.auth;
 import com.nimbusds.jose.JOSEException;
 import com.nimbusds.jwt.SignedJWT;
 import org.jboss.resteasy.core.interception.PostMatchContainerRequestContext;
+import com.temporary.backend.dao.AccountDAO;
 import com.temporary.backend.exception.ErrorCode;
 import com.temporary.backend.model.Account;
+import com.temporary.backend.model.AccountType;
 import com.temporary.backend.rest.BaseRestService;
 import com.temporary.backend.rest.config.RestError;
 import com.temporary.backend.util.SecurityUtils;
@@ -18,6 +20,8 @@ import javax.ws.rs.core.Context;
 import javax.ws.rs.core.Response;
 import java.io.IOException;
 import java.lang.reflect.Method;
+import java.util.Arrays;
+import java.util.HashSet;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -40,21 +44,20 @@ public class RoleBasedContainerRequestFilter implements ContainerRequestFilter {
             return;
         }
 
-        // TODO: Authentication work
-//        boolean permitAll = permitAllUsers(requestMethod);
-//        boolean abortRequestOnAuthFailure = !permitAll;
-//        Account account = authenticate(requestContext, abortRequestOnAuthFailure);
-//        if (account == null && abortRequestOnAuthFailure) {
-//            return;
-//        }
-//
-//        AccountTypesAllowed accountTypesAllowedAnnotation = getAccountTypesAllowed(requestMethod);
-//    if (account != null && accountTypesAllowedAnnotation != null) {
-//        HashSet<AccountType> userTypesAllowed = new HashSet<>(Arrays.asList(accountTypesAllowedAnnotation.value()));
-//        if (!userTypesAllowed.contains(account.getAccountType())) {
-//            abortRequestUnauthorized(requestContext, "Authorization failed - user role does not have access");
-//        }
-//    }
+        boolean permitAll = permitAllUsers(requestMethod);
+        boolean abortRequestOnAuthFailure = !permitAll;
+        Account account = authenticate(requestContext, abortRequestOnAuthFailure);
+        if (account == null && abortRequestOnAuthFailure) {
+            return;
+        }
+
+        AccountTypesAllowed accountTypesAllowedAnnotation = getAccountTypesAllowed(requestMethod);
+    if (account != null && accountTypesAllowedAnnotation != null) {
+        HashSet<AccountType> userTypesAllowed = new HashSet<>(Arrays.asList(accountTypesAllowedAnnotation.value()));
+        if (!userTypesAllowed.contains(account.getAccountType())) {
+            abortRequestUnauthorized(requestContext, "Authorization failed - user role does not have access");
+        }
+    }
     }
 
     private Account authenticate(ContainerRequestContext requestContext, boolean abortRequestOnFailure) {
@@ -65,12 +68,11 @@ public class RoleBasedContainerRequestFilter implements ContainerRequestFilter {
                 SignedJWT jwt = SecurityUtils.parse(token);
                 int accountId = Integer.parseInt(jwt.getJWTClaimsSet().getSubject());
 
-                // TODO: Implement Accounts
-//                Account account = new AccountManager().getAccount(accountId);
-//                if (account!= null) {
-//                    setRequestContextFromUser(account, token, requestContext);
-//                    return account;
-//                }
+                Account account = new AccountDAO().getAccount(accountId, true);
+                if (account!= null) {
+                    setRequestContextFromUser(account, token, requestContext);
+                    return account;
+                }
                 return null;
             } catch(JOSEException e) {
                 if (abortRequestOnFailure) {
@@ -93,12 +95,12 @@ public class RoleBasedContainerRequestFilter implements ContainerRequestFilter {
         requestContext.setProperty(BaseRestService.USER_ATTRIBUTE, account);
     }
 
-//    private AccountTypesAllowed getAccountTypesAllowed(Method requestMethod) {
-//        if (requestMethod.getDeclaringClass().isAnnotationPresent(AccountTypesAllowed.class)) {
-//            return requestMethod.getDeclaringClass().getAnnotation(AccountTypesAllowed.class);
-//        }
-//        return requestMethod.getAnnotation(AccountTypesAllowed.class);
-//    }
+    private AccountTypesAllowed getAccountTypesAllowed(Method requestMethod) {
+        if (requestMethod.getDeclaringClass().isAnnotationPresent(AccountTypesAllowed.class)) {
+            return requestMethod.getDeclaringClass().getAnnotation(AccountTypesAllowed.class);
+        }
+        return requestMethod.getAnnotation(AccountTypesAllowed.class);
+    }
 
     private boolean permitAllUsers(Method requestMethod) {
         return requestMethod.getDeclaringClass().isAnnotationPresent(PermitAll.class) || requestMethod.isAnnotationPresent(PermitAll.class);
