@@ -13,7 +13,7 @@ public class Scope extends BaseModel {
     private Integer parentId;
     private Scope parent;
     private String title;
-    private int population;
+    private long population;
     public Scope() {}
 
     public Scope(ResultSet rs) throws SQLException {
@@ -24,7 +24,7 @@ public class Scope extends BaseModel {
     public void setScopeId(int scopeId) { this.scopeId = scopeId; }
     public String getTitle() { return title; }
     public void setTitle(String title) { this.title = title; }
-    public int getPopulation() { return population; }
+    public long getPopulation() { return population; }
     public void setPopulation(int population) { this.population = population; }
     public Integer getParentId() { return parentId; }
     public void setParentId(Integer parentId) { this.parentId = parentId; }
