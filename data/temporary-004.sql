@@ -19,3 +19,5 @@ CREATE TABLE `assembly_user` (
     FOREIGN KEY (`account_id`) references account(`account_id`),
     UNIQUE KEY `assembly_user` (`assembly_id`, `account_id`)
 );
+
+-- Ran in Dev 04-28-24
