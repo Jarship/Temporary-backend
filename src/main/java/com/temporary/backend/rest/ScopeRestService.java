@@ -58,10 +58,8 @@ public class ScopeRestService extends BaseRestService {
     @AccountTypesAllowed({AccountType.ADMIN, AccountType.USER})
     public Response createScope(Scope scope) {
         try {
-            ScopeDAO dao = new ScopeDAO();
-            int scopeId = dao.createScope(scope);
-            scope.setScopeId(scopeId);
-            return successResponse(scope);
+            ScopeManager manager = new ScopeManager();
+            return successResponse(manager.createScope(scope));
         } catch (Exception e) {
             return handleException(e);
         }
