@@ -58,7 +58,7 @@ public class AssemblyRestService extends BaseRestService {
     }
     @Path("{assemblyId}")
     @GET
-    @PermitAll
+    @AccountTypesAllowed({AccountType.ADMIN})
     public Response getAssembly(@PathParam("assemblyId") int assemblyId) {
         try {
             AssemblyDAO dao = new AssemblyDAO();
