@@ -29,7 +29,7 @@ public class AccountDAO  extends BaseDAO {
 
     public int deleteAccount(int accountId) throws DatabaseException {
         String[] sqls = new String[]{
-//                "delete from account_relationships WHERE primary_id = ?",
+                "delete from assembly_user WHERE account_id = ?",
 //                "delete from account_relationships WHERE secondary_id = ?",
                 "delete from account WHERE account_id = ?"
         };
