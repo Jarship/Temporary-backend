@@ -1,6 +1,5 @@
 package com.temporary.backend.rest;
 
-import com.temporary.backend.dao.AccountDAO;
 import com.temporary.backend.exception.ApplicationException;
 import com.temporary.backend.manager.AccountManager;
 import com.temporary.backend.model.Account;
@@ -13,7 +12,6 @@ import javax.ws.rs.*;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-import java.util.List;
 
 @Path("account")
 @Consumes({MediaType.APPLICATION_JSON})
